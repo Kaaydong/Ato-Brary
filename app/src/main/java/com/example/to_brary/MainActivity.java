@@ -2,7 +2,9 @@ package com.example.to_brary;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -11,9 +13,13 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 public class MainActivity extends AppCompatActivity {
 
-    GridView displayGridView;
+    private GridView displayGridView;
+    private CustomAdapter customAdapter;
+    private int[] images = {R.drawable.test_image, R.drawable.test_image2}; // tester array
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         displayGridView = findViewById(R.id.gridview_display_mainactivity);
 
-        CustomAdapter customAdapter = new CustomAdapter();
+        customAdapter = new CustomAdapter(images,MainActivity.this);
         displayGridView.setAdapter(customAdapter);
 
         displayGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -31,12 +37,25 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "DIS WORKS", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     private class CustomAdapter extends BaseAdapter {
+
+        private Context context;
+        private int[] images;
+        private LayoutInflater inflater;
+
+        public CustomAdapter(int[] images, Context context)
+        {
+            this.context = context;
+            this.images = images;
+            this.inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
+        }
+
         @Override
         public int getCount() {
-            return 0;
+            return images.length;
         }
 
         @Override
@@ -51,13 +70,17 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view1 = getLayoutInflater().inflate(R.layout.row_data,null);
 
-            ImageView image = findViewById(R.id.imageView_picture_rowdata);
+            if(convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.row_data, parent, false);
+            }
 
-           // image.setImageResource("test_image.jpg");
+            ImageView image = convertView.findViewById(R.id.imageView_picture_rowdata);
 
-            return view1;
+            image.setImageResource(images[position]);
+
+            Toast.makeText(MainActivity.this,"hi",Toast.LENGTH_SHORT).show();
+            return convertView;
         }
     }
 }
