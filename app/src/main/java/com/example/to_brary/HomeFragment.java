@@ -2,13 +2,20 @@ package com.example.to_brary;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
+import android.widget.Toast;
 
 
 /**
@@ -25,8 +32,9 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-    GridView displayGridView;
+    private GridView displayGridView;
+    private GridViewAdapter customAdapter;
+    private int[] images = {R.drawable.test_image, R.drawable.test_image2}; // tester array
 
     public HomeFragment() {
         // Required empty public constructor
@@ -62,9 +70,27 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+     //   return inflater.inflate(R.layout.fragment_home,null);
+        displayGridView = (GridView) rootView.findViewById(R.id.gridview_display_home);
+        customAdapter = new GridViewAdapter (images, getActivity());
+        displayGridView.setAdapter(customAdapter);
 
 
+        displayGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                getActivity().getFragmentManager().popBackStack();
+                Navigation.findNavController(getActivity(), R.id.fragment).navigate(R.id.action_homeFragment_to_imageViewFragment);
+
+            }
+        });
+
+        return rootView;
     }
+
 }
+
