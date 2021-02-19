@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 getActivity().getFragmentManager().popBackStack();
-                Navigation.findNavController(getActivity(), R.id.fragment).navigate(R.id.action_homeFragment_to_imageViewFragment);
+                Navigation.findNavController(getActivity(), R.id.fragment_navhost_main).navigate(R.id.action_homeFragment_to_imageViewFragment);
 
             }
         });
