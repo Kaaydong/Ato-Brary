@@ -6,12 +6,15 @@
         android:id="@+id/menu_options_settingsTab"
         android:title="Settings" />
     <item
-        android:id="@+id/menu_options_loginPage"
+        android:id="@+id/loginPage"
         android:title="Login" />
     <item
         android:id="@+id/menu_options_logout"
         android:title="Logout" />
     <item
-        android:id="@+id/menu_options_tagPage"
-        android:title="Tag Page" />
+        android:id="@+id/imagePostingPage"
+        android:title="Image Posting" />
+    <item
+        android:id="@+id/tagCreationPage"
+        android:title="Tag Creation" />
 </menu>
