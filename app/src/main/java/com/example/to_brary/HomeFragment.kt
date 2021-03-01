@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
         return rootView
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.options_menu, menu)
     }
@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return NavigationUI.onNavDestinationSelected(item,requireView().findNavController())
                 || super.onOptionsItemSelected(item)
-    }
+    }*/
 
     companion object {
         // TODO: Rename parameter arguments, choose names that match
