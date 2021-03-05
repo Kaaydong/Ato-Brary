@@ -42,7 +42,7 @@ class HomeFragment : Fragment() {
             requireActivity().fragmentManager.popBackStack()
             Navigation.findNavController(requireActivity(), R.id.fragment_navhost_main).navigate(R.id.action_homeFragment_to_imageViewFragment)
         }
-        setHasOptionsMenu(true)
+        //setHasOptionsMenu(true)
         return rootView
     }
 

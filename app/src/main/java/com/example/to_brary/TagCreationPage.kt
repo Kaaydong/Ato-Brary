@@ -29,7 +29,7 @@ class TagCreationPage : Fragment() {
         return inflater.inflate(R.layout.fragment_tag_creation_page, container, false)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         setHasOptionsMenu(true)
         inflater.inflate(R.menu.options_menu, menu)
@@ -38,7 +38,7 @@ class TagCreationPage : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return NavigationUI.onNavDestinationSelected(item,requireView().findNavController())
                 || super.onOptionsItemSelected(item)
-    }
+    }*/
 
     companion object {
         // TODO: Rename parameter arguments, choose names that match
