@@ -10,15 +10,22 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.backendless.Backendless
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private val apiKey = "key"
+    private val applicationID = "ID"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val navController = this.findNavController(R.id.fragment_navhost_main)
         NavigationUI.setupActionBarWithNavController(this,navController)
+
+        Backendless.initApp(this, applicationID,apiKey)
 
     }
 
