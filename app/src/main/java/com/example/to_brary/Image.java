@@ -1,6 +1,7 @@
 package com.example.to_brary;
 
-import java.util.ArrayList;
+import org.json.JSONObject;
+
 import java.util.Date;
 
 public class Image {
@@ -9,16 +10,13 @@ public class Image {
 
     private boolean lewd, gore;
 
-    private ArrayList<String> artists, copyright, characters, details, meta;
+    private JSONObject artists, copyright, characters, details, meta;
 
-    private Date dateUploaded;
-    private int imageID;
+    private Date created; // (Date Uploaded)
+    private int imageId;
 
-
-
-    public Image() {
-
-    }
+    private String imageFile;
+    private String originalImageSource;
 
 
     public int getPicture() {
@@ -45,97 +43,75 @@ public class Image {
         this.gore = gore;
     }
 
-    public ArrayList<String> getArtists() {
+    public JSONObject getArtists() {
         return artists;
     }
 
-    public void setArtists(ArrayList<String> artists) {
+    public void setArtists(JSONObject artists) {
         this.artists = artists;
     }
 
-    public ArrayList<String> getCopyright() {
+    public JSONObject getCopyright() {
         return copyright;
     }
 
-    public void setCopyright(ArrayList<String> copyright) {
+    public void setCopyright(JSONObject copyright) {
         this.copyright = copyright;
     }
 
-    public ArrayList<String> getCharacters() {
+    public JSONObject getCharacters() {
         return characters;
     }
 
-    public void setCharacters(ArrayList<String> characters) {
+    public void setCharacters(JSONObject characters) {
         this.characters = characters;
     }
 
-    public ArrayList<String> getDetails() {
+    public JSONObject getDetails() {
         return details;
     }
 
-    public void setDetails(ArrayList<String> details) {
+    public void setDetails(JSONObject details) {
         this.details = details;
     }
 
-    public ArrayList<String> getMeta() {
+    public JSONObject getMeta() {
         return meta;
     }
 
-    public void setMeta(ArrayList<String> meta) {
+    public void setMeta(JSONObject meta) {
         this.meta = meta;
     }
 
-    public Date getDateUploaded() {
-        return dateUploaded;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setDateUploaded(Date dateUploaded) {
-        this.dateUploaded = dateUploaded;
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
-    public int getImageID() {
-        return imageID;
+    public int getImageId() {
+        return imageId;
     }
 
-    public void setImageID(int imageID) {
-        this.imageID = imageID;
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
     }
 
-    public String getOriginalImageLink() {
-        return originalImageLink;
+    public String getImageFile() {
+        return imageFile;
     }
 
-    public void setOriginalImageLink(String originalImageLink) {
-        this.originalImageLink = originalImageLink;
+    public void setImageFile(String imageFile) {
+        this.imageFile = imageFile;
     }
 
-    public String getOriginalImageFile() {
-        return originalImageFile;
+    public String getOriginalImageSource() {
+        return originalImageSource;
     }
 
-    public void setOriginalImageFile(String originalImageFile) {
-        this.originalImageFile = originalImageFile;
+    public void setOriginalImageSource(String originalImageSource) {
+        this.originalImageSource = originalImageSource;
     }
-
-    public int getImageFileSize() {
-        return imageFileSize;
-    }
-
-    public void setImageFileSize(int imageFileSize) {
-        this.imageFileSize = imageFileSize;
-    }
-
-    public String getUploader() {
-        return uploader;
-    }
-
-    public void setUploader(String uploader) {
-        this.uploader = uploader;
-    }
-
-    private String originalImageLink; // Subject to change
-    private String originalImageFile; // Subject to change
-    private int imageFileSize; // KB
-    private String uploader;
-
 }
