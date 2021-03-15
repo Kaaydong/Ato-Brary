@@ -13,6 +13,7 @@ import androidx.navigation.ui.NavigationUI
  * A simple [Fragment] subclass.
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
+ * I hope this works
  */
 class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
