@@ -9,7 +9,7 @@
         android:id="@+id/homeFragment"
         android:name="com.example.to_brary.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_imageViewFragment"
             app:destination="@id/imageViewFragment" />
@@ -18,7 +18,7 @@
         android:id="@+id/imageViewFragment"
         android:name="com.example.to_brary.ImageViewFragment"
         android:label="fragment_image_view"
-        tools:layout="@layout/fragment_image_view" >
+        tools:layout="@layout/fragment_image_view">
         <action
             android:id="@+id/action_imageViewFragment_to_homeFragment"
             app:destination="@id/homeFragment" />

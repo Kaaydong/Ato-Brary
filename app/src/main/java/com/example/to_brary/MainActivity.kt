@@ -28,8 +28,6 @@ class MainActivity : AppCompatActivity() {
         val navController = this.findNavController(R.id.fragment_navhost_main)
         NavigationUI.setupActionBarWithNavController(this,navController)
 
-        Backendless.initApp(this, applicationID,apiKey)
-
     }
 
     //options menu
