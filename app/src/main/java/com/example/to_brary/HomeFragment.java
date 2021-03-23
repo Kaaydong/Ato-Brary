@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
     private GridViewAdapter customAdapter;
     private int[] pictures = {R.drawable.test_image, R.drawable.test_image2}; // tester array
 
-    private static final String API_KEY = "";
+
     private static final String APPLICATION_ID = "8F1C82C8-0934-3197-FFC8-E3AF33624600";
 
     private String[] images;
@@ -100,7 +100,8 @@ public class HomeFragment extends Fragment {
 
     public void getDefaultImageList()
     {
-        Backendless.initApp(getActivity(),APPLICATION_ID, API_KEY);
+        ApiKey key = new ApiKey();
+        Backendless.initApp(getActivity(),APPLICATION_ID, key.getApiKey());
 
         Backendless.Data.of(Image.class).find(new AsyncCallback<List<Image>>() {
             @Override
