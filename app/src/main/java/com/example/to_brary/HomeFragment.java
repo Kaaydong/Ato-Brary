@@ -107,9 +107,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void handleResponse(List<Image> response) {
 
+                images = new String[response.size()];
+
                 for(int i=0; response.size()>i; i++)
                 {
-                    images = new String[response.size()];
                     images[i] = response.get(i).getImageFile();
                 }
 
