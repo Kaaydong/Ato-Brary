@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class HomeFragment extends Fragment {
 
     private static final String APPLICATION_ID = "8F1C82C8-0934-3197-FFC8-E3AF33624600";
 
+    private List<Image> imageList;
     private String[] images;
 
     public HomeFragment() {
@@ -89,8 +91,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                Gson gson = new Gson();
+                String json = gson.toJson(imageList.get(position));
+
+                Bundle bundle = new Bundle();
+                bundle.putString("bundle",json);
+
                 getActivity().getFragmentManager().popBackStack();
-                Navigation.findNavController(getActivity(), R.id.fragment_navhost_main).navigate(R.id.action_homeFragment_to_imageViewFragment);
+                Navigation.findNavController(getActivity(), R.id.fragment_navhost_main).navigate(R.id.action_homeFragment_to_imageViewFragment, bundle);
 
             }
         });
@@ -107,6 +115,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void handleResponse(List<Image> response) {
 
+                imageList = response;
                 images = new String[response.size()];
 
                 for(int i=0; response.size()>i; i++)
