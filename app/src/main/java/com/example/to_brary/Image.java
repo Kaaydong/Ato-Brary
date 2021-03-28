@@ -10,7 +10,14 @@ public class Image {
 
     private boolean lewd, gore;
 
-    private JSONObject artists, copyright, characters, details, meta;
+    private String artists;
+
+
+
+    private String copyright;
+    private String characters;
+    private String details;
+    private String meta;
 
     private Date created; // (Date Uploaded)
     private int imageId;
@@ -18,6 +25,46 @@ public class Image {
     private String imageFile;
     private String originalImageSource;
 
+
+    public String getArtists() {
+        return artists;
+    }
+
+    public void setArtists(String artists) {
+        this.artists = artists;
+    }
+
+    public String getCopyright() {
+        return copyright;
+    }
+
+    public void setCopyright(String copyright) {
+        this.copyright = copyright;
+    }
+
+    public String getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(String characters) {
+        this.characters = characters;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public String getMeta() {
+        return meta;
+    }
+
+    public void setMeta(String meta) {
+        this.meta = meta;
+    }
 
     public int getPicture() {
         return picture;
@@ -41,46 +88,6 @@ public class Image {
 
     public void setGore(boolean gore) {
         this.gore = gore;
-    }
-
-    public JSONObject getArtists() {
-        return artists;
-    }
-
-    public void setArtists(JSONObject artists) {
-        this.artists = artists;
-    }
-
-    public JSONObject getCopyright() {
-        return copyright;
-    }
-
-    public void setCopyright(JSONObject copyright) {
-        this.copyright = copyright;
-    }
-
-    public JSONObject getCharacters() {
-        return characters;
-    }
-
-    public void setCharacters(JSONObject characters) {
-        this.characters = characters;
-    }
-
-    public JSONObject getDetails() {
-        return details;
-    }
-
-    public void setDetails(JSONObject details) {
-        this.details = details;
-    }
-
-    public JSONObject getMeta() {
-        return meta;
-    }
-
-    public void setMeta(JSONObject meta) {
-        this.meta = meta;
     }
 
     public Date getCreated() {

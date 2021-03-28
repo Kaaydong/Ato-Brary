@@ -20,9 +20,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.backendless.Backendless;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
+import com.backendless.files.BackendlessFile;
+import com.google.gson.Gson;
+
 import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +50,7 @@ public class ImagePostingPage extends Fragment {
 
     private ImageView previewImage;
     private Bitmap imageBitmap;
+    private String bitmapName;
     private Button imageSelectionButton, postingButton;
     private AutoCompleteTextView artistsEditText, copyrightEditText, charactersEditText, descriptionsEditText;
 
@@ -93,29 +103,6 @@ public class ImagePostingPage extends Fragment {
         return rootView;
     }
 
-    public void openGallery() {
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, 100);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == getActivity().RESULT_OK) {
-            Uri targetUri = data.getData();
-
-            Bitmap bitmap;
-            try {
-                bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(targetUri));
-                previewImage.setImageBitmap(bitmap);
-            } catch (FileNotFoundException e) {
-
-                e.printStackTrace();
-            }
-        }
-    }
-
-
 
     public void setListeners()
     {
@@ -133,14 +120,104 @@ public class ImagePostingPage extends Fragment {
                 {
                     Toast.makeText(getActivity(),"PLEASE SELECT AN IMAGE",Toast.LENGTH_SHORT).show();
                 }
-
-                if(artistsEditText.getText()==null || copyrightEditText.getText()==null ||
-                charactersEditText.getText()==null || descriptionsEditText.getText()==null)
+                else if(artistsEditText.getText()==null || copyrightEditText.getText()==null ||
+                        charactersEditText.getText()==null || descriptionsEditText.getText()==null)
                 {
                     Toast.makeText(getActivity(),"PLEASE FILL OUT EVERY BOX",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    uploadImageFile();
                 }
             }
         });
     }
+
+
+    public void openGallery() {
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, 100);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == getActivity().RESULT_OK) {
+            Uri targetUri = data.getData();
+
+            Bitmap bitmap;
+            try {
+                bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(targetUri));
+                imageBitmap = bitmap;
+                bitmapName = bitmap.toString();
+                previewImage.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void uploadImageFile()
+    {
+
+        Backendless.Files.Android.upload(imageBitmap, Bitmap.CompressFormat.JPEG, 100, bitmapName, "images_folder", new AsyncCallback<BackendlessFile>() {
+            @Override
+            public void handleResponse(BackendlessFile response) {
+
+                HashMap hashMap = new HashMap();
+                hashMap.put("imageFile", response.getFileURL());
+                hashMap.put("artists", StringsToJson(artistsEditText));
+                hashMap.put("copyright", StringsToJson(copyrightEditText));
+                hashMap.put("characters", StringsToJson(charactersEditText));
+                hashMap.put("details", StringsToJson(descriptionsEditText));
+
+                Backendless.Data.of("Image").save(hashMap, new AsyncCallback<Map>() {
+                    @Override
+                    public void handleResponse(Map response) {
+                        Toast.makeText(getActivity(),"IMAGE SUCCESSFULLY UPLOADED",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void handleFault(BackendlessFault fault) {
+                        Toast.makeText(getActivity(),"IMAGE WAS NOT UPLOADED",Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+                Toast.makeText(getActivity(),"PROBLEMS WITH IMAGE UPLOAD, TRY AGAIN LATER",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public String StringsToJson(AutoCompleteTextView textView)
+    {
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        String text = textView.getText().toString();
+
+        while (text.indexOf(" ") == 0)
+        {
+            text = text.substring(1);
+        }
+
+        while (text.indexOf(" ") == text.length())
+        {
+            text = text.substring(0, text.length() -1);
+        }
+
+        while (text.indexOf(" ") != -1)
+        {
+            String tag = text.substring(0,text.indexOf(" ") + 1);
+            arrayList.add(tag);
+            text = text.substring(text.indexOf(" ") + 1);
+        }
+
+        String json = new Gson().toJson(arrayList);
+        return json;
+    }
+
 }
 
