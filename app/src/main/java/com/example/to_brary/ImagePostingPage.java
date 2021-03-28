@@ -208,6 +208,11 @@ public class ImagePostingPage extends Fragment {
             text = text.substring(0, text.length() -1);
         }
 
+        if (text.indexOf(" ") == -1)
+        {
+            return text;
+        }
+
         while (text.indexOf(" ") != -1)
         {
             String tag = text.substring(0,text.indexOf(" ") + 1);
