@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -120,8 +121,8 @@ public class ImagePostingPage extends Fragment {
                 {
                     Toast.makeText(getActivity(),"PLEASE SELECT AN IMAGE",Toast.LENGTH_SHORT).show();
                 }
-                else if(artistsEditText.getText()==null || copyrightEditText.getText()==null ||
-                        charactersEditText.getText()==null || descriptionsEditText.getText()==null)
+                else if(isEmpty(artistsEditText) || isEmpty(copyrightEditText) ||
+                        isEmpty(charactersEditText) || isEmpty(descriptionsEditText))
                 {
                     Toast.makeText(getActivity(),"PLEASE FILL OUT EVERY BOX",Toast.LENGTH_SHORT).show();
                 }
@@ -165,6 +166,13 @@ public class ImagePostingPage extends Fragment {
             @Override
             public void handleResponse(BackendlessFile response) {
 
+                Image theImage = new Image();
+                theImage.setImageFile(response.getFileURL());
+                theImage.setArtists(StringsToJson(artistsEditText));
+                theImage.setCopyright(StringsToJson(copyrightEditText));
+                theImage.setCharacters(StringsToJson(charactersEditText));
+                theImage.setDetails(StringsToJson(descriptionsEditText));
+
                 HashMap hashMap = new HashMap();
                 hashMap.put("imageFile", response.getFileURL());
                 hashMap.put("artists", StringsToJson(artistsEditText));
@@ -172,10 +180,19 @@ public class ImagePostingPage extends Fragment {
                 hashMap.put("characters", StringsToJson(charactersEditText));
                 hashMap.put("details", StringsToJson(descriptionsEditText));
 
-                Backendless.Data.of("Image").save(hashMap, new AsyncCallback<Map>() {
+                Backendless.Data.of(Image.class).save(theImage, new AsyncCallback<Image>() {
                     @Override
-                    public void handleResponse(Map response) {
+                    public void handleResponse(Image response) {
                         Toast.makeText(getActivity(),"IMAGE SUCCESSFULLY UPLOADED",Toast.LENGTH_SHORT).show();
+
+                        Gson gson = new Gson();
+                        String json = gson.toJson(response);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("bundle",json);
+
+                        getActivity().getFragmentManager().popBackStack();
+                        Navigation.findNavController(getActivity(), R.id.fragment_navhost_main).navigate(R.id.action_imagePostingPage_to_imageViewFragment, bundle);
                     }
 
                     @Override
@@ -210,7 +227,8 @@ public class ImagePostingPage extends Fragment {
 
         if (text.indexOf(" ") == -1)
         {
-            return text;
+
+            return "[\"" + text + "\"]";
         }
 
         while (text.indexOf(" ") != -1)
@@ -222,6 +240,13 @@ public class ImagePostingPage extends Fragment {
 
         String json = new Gson().toJson(arrayList);
         return json;
+    }
+
+    private boolean isEmpty(EditText etText) {
+        if (etText.getText().toString().trim().length() > 0)
+            return false;
+
+        return true;
     }
 
 }

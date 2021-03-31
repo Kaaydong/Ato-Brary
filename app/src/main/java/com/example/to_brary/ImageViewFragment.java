@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -29,6 +30,7 @@ public class ImageViewFragment extends Fragment {
     private String mParam2;
 
     private ImageView imageView;
+    private TextView artistsTextView, copyrightTextView, charactersTextView, descriptionsTextView;
 
     public ImageViewFragment() {
         // Required empty public constructor
@@ -68,6 +70,10 @@ public class ImageViewFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_image_view, container, false);
 
         imageView = rootView.findViewById(R.id.imageView_imagePage_image);
+        artistsTextView = rootView.findViewById(R.id.textView_imagePage_artists);
+        copyrightTextView = rootView.findViewById(R.id.textView_imagePage_copyright);
+        charactersTextView = rootView.findViewById(R.id.textView_imagePage_characters);
+        descriptionsTextView = rootView.findViewById(R.id.textView_imagePage_descriptions);
 
         String json = getArguments().getString("bundle");
 
@@ -75,6 +81,10 @@ public class ImageViewFragment extends Fragment {
         Image image = gson.fromJson(json, Image.class);
 
         Picasso.get().load(image.getImageFile()).into(imageView);
+        artistsTextView.setText(image.getArtists());
+        copyrightTextView.setText(image.getCopyright());
+        charactersTextView.setText(image.getCharacters());
+        descriptionsTextView.setText(image.getDetails());
 
         return rootView;
     }

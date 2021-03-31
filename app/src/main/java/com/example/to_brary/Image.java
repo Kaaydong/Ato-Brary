@@ -11,9 +11,6 @@ public class Image {
     private boolean lewd, gore;
 
     private String artists;
-
-
-
     private String copyright;
     private String characters;
     private String details;

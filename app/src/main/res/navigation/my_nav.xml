@@ -32,7 +32,11 @@
         android:id="@+id/imagePostingPage"
         android:name="com.example.to_brary.ImagePostingPage"
         android:label="fragment_image_posting_page"
-        tools:layout="@layout/fragment_image_posting_page" />
+        tools:layout="@layout/fragment_image_posting_page" >
+        <action
+            android:id="@+id/action_imagePostingPage_to_imageViewFragment"
+            app:destination="@id/imageViewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tagCreationPage"
         android:name="com.example.to_brary.TagCreationPage"
