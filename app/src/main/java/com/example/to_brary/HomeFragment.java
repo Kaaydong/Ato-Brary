@@ -17,6 +17,7 @@ import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -134,6 +135,23 @@ public class HomeFragment extends Fragment {
                 Log.e("NOTICE", "U FUCKING DONKEY");
             }
         });
+    }
+
+    public void createCustomImageList(String searchTerm)
+    {
+        String word = "\"" + searchTerm + "\"";
+        ArrayList<Image> newImageList = new ArrayList<>();
+
+        for (int i = 0; i < imageList.size();i++)
+        {
+            String combinedString = imageList.get(i).getArtists() + imageList.get(i).getCopyright() + imageList.get(i).getCharacters() + imageList.get(i).getDetails();
+            if (combinedString.indexOf("word") != -1)
+            {
+                newImageList.add(imageList.get(i));
+            }
+        }
+
+        imageList = newImageList;
     }
 }
 

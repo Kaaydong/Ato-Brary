@@ -248,6 +248,5 @@ public class ImagePostingPage extends Fragment {
 
         return true;
     }
-
 }
 
