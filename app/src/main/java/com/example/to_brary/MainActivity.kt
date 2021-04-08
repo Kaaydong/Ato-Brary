@@ -8,6 +8,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.SearchView
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity() {
             R.id.loginPage -> findNavController(R.id.fragment_navhost_main).navigate(R.id.loginPage)
             R.id.imagePostingPage -> findNavController(R.id.fragment_navhost_main).navigate(R.id.imagePostingPage)
             R.id.tagCreationPage -> findNavController(R.id.fragment_navhost_main).navigate(R.id.tagCreationPage)
+            R.id.home -> findNavController(R.id.fragment_navhost_main).navigate(R.id.homeFragment)
         }
         return super.onOptionsItemSelected(item)
     }
