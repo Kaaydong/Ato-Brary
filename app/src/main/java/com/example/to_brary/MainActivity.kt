@@ -3,31 +3,26 @@ package com.example.to_brary
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.SearchView
-import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.backendless.Backendless
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private val apiKey = "key"
     private val applicationID = "ID"
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val navController = this.findNavController(R.id.fragment_navhost_main)
-        NavigationUI.setupActionBarWithNavController(this,navController)
+        NavigationUI.setupActionBarWithNavController(this, navController)
 
     }
 
@@ -41,6 +36,27 @@ class MainActivity : AppCompatActivity() {
                 setSearchableInfo(searchManager.getSearchableInfo(componentName))
             }
         }
+
+        val menuItem = menu!!.findItem(R.id.search)
+        val searchView = menuItem.actionView as SearchView
+        searchView.queryHint = "Insert Tags"
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                val bundle = Bundle()
+                bundle.putString("listOfTags", query)
+
+
+                findNavController(R.id.fragment_navhost_main).navigate(R.id.homeFragment, bundle)
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+
+                return false
+            }
+        })
 
         return true
     }
@@ -60,4 +76,6 @@ class MainActivity : AppCompatActivity() {
         val navController = this.findNavController(R.id.fragment_navhost_main)
         return navController.navigateUp()
     }
+
 }
+

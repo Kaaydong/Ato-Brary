@@ -1,14 +1,22 @@
 package com.example.to_brary;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.GridView;
+import android.widget.SearchView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -117,11 +125,25 @@ public class HomeFragment extends Fragment {
             public void handleResponse(List<Image> response) {
 
                 imageList = response;
-                images = new String[response.size()];
+                Intent intent = getActivity().getIntent();
 
-                for(int i=0; response.size()>i; i++)
+                if(intent.hasExtra("listOfTags")) {
+                    String listOfTags = getArguments().getString("listOfTags");
+                    ArrayList<String> tagsList = stringsToJson(listOfTags);
+
+
+
+                    for(int i = 0; i < tagsList.size();i++)
+                    {
+                        createCustomImageList(tagsList.get(i));
+                    }
+                }
+
+                images = new String[imageList.size()];
+
+                for(int i=0; imageList.size()>i; i++)
                 {
-                    images[i] = response.get(i).getImageFile();
+                    images[i] = imageList.get(i).getImageFile();
                 }
 
 
@@ -152,6 +174,31 @@ public class HomeFragment extends Fragment {
         }
 
         imageList = newImageList;
+    }
+
+    public ArrayList<String> stringsToJson(String text)
+    {
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        while (text.indexOf(" ") == 0)
+        {
+            text = text.substring(1);
+        }
+
+        while (text.indexOf(" ") == text.length())
+        {
+            text = text.substring(0, text.length() -1);
+        }
+
+        while (text.indexOf(" ") != -1)
+        {
+            String tag = text.substring(0,text.indexOf(" ") + 1);
+            arrayList.add(tag);
+            text = text.substring(text.indexOf(" ") + 1);
+        }
+
+        return  arrayList;
+
     }
 }
 
