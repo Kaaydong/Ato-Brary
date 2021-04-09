@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     private val apiKey = "key"
     private val applicationID = "ID"
-
+    private var tagsList = "thereIsNoGodDamnWaySomeoneIsPuttingThisIntoTHeTextView"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                 val bundle = Bundle()
                 bundle.putString("listOfTags", query)
 
-
+                tagsList = query
                 findNavController(R.id.fragment_navhost_main).navigate(R.id.homeFragment, bundle)
 
                 return false
@@ -75,6 +75,10 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = this.findNavController(R.id.fragment_navhost_main)
         return navController.navigateUp()
+    }
+
+    public fun getItemsList(): String{
+        return tagsList;
     }
 
 }

@@ -125,11 +125,13 @@ public class HomeFragment extends Fragment {
             public void handleResponse(List<Image> response) {
 
                 imageList = response;
-                Intent intent = getActivity().getIntent();
 
-                if(intent.hasExtra("listOfTags")) {
-                    String listOfTags = getArguments().getString("listOfTags");
-                    ArrayList<String> tagsList = stringsToJson(listOfTags);
+
+                String listFromActvity = ((MainActivity)getActivity()).getItemsList();
+                Log.e("HELLo", listFromActvity);
+
+                if(listFromActvity != "thereIsNoGodDamnWaySomeoneIsPuttingThisIntoTHeTextView") {
+                    ArrayList<String> tagsList = stringsToJson(listFromActvity);
 
 
 
