@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -222,7 +223,8 @@ public class ImagePostingPage extends Fragment {
 
         while (text.indexOf(" ") == text.length())
         {
-            text = text.substring(0, text.length() -1);
+            Log.e("THIS HAPPENS","HELLO");
+            text = text.substring(0, text.length() - 1);
         }
 
         if (text.indexOf(" ") == -1)
@@ -233,7 +235,7 @@ public class ImagePostingPage extends Fragment {
 
         while (text.indexOf(" ") != -1)
         {
-            String tag = text.substring(0,text.indexOf(" ") + 1);
+            String tag = text.substring(0,text.indexOf(" "));
             arrayList.add(tag);
             text = text.substring(text.indexOf(" ") + 1);
         }

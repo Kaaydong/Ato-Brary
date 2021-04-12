@@ -128,12 +128,9 @@ public class HomeFragment extends Fragment {
 
 
                 String listFromActvity = ((MainActivity)getActivity()).getItemsList();
-                Log.e("HELLo", listFromActvity);
 
                 if(listFromActvity != "thereIsNoGodDamnWaySomeoneIsPuttingThisIntoTHeTextView") {
                     ArrayList<String> tagsList = stringsToJson(listFromActvity);
-
-
 
                     for(int i = 0; i < tagsList.size();i++)
                     {
@@ -163,13 +160,14 @@ public class HomeFragment extends Fragment {
 
     public void createCustomImageList(String searchTerm)
     {
-        String word = "\"" + searchTerm + "\"";
+        String word = searchTerm;
         ArrayList<Image> newImageList = new ArrayList<>();
 
         for (int i = 0; i < imageList.size();i++)
         {
             String combinedString = imageList.get(i).getArtists() + imageList.get(i).getCopyright() + imageList.get(i).getCharacters() + imageList.get(i).getDetails();
-            if (combinedString.indexOf("word") != -1)
+
+            if (combinedString.indexOf(word) != -1)
             {
                 newImageList.add(imageList.get(i));
             }
@@ -181,6 +179,12 @@ public class HomeFragment extends Fragment {
     public ArrayList<String> stringsToJson(String text)
     {
         ArrayList<String> arrayList = new ArrayList<>();
+
+
+        if(text.indexOf(" ") == -1)
+        {
+            arrayList.add(text);
+        }
 
         while (text.indexOf(" ") == 0)
         {
