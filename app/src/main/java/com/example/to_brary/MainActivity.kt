@@ -1,15 +1,19 @@
 package com.example.to_brary
 
+import android.app.ActionBar
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import java.lang.reflect.Field
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,7 +28,22 @@ class MainActivity : AppCompatActivity() {
         val navController = this.findNavController(R.id.fragment_navhost_main)
         NavigationUI.setupActionBarWithNavController(this, navController)
 
+        val actionBar = actionBar
+        if(actionBar != null){
+            actionBar.setDisplayShowTitleEnabled(false)
+            actionBar.setDisplayShowCustomEnabled(true)
+            var customView = layoutInflater.inflate(R.layout.actionbar_title, null)
+            var customTitle = customView.findViewById<>(R.id.action_bar_title)
+            customTitle.setOnClickListener(View.OnClickListener {
+                @Override
+                fun onClick(view: View){
+                    findNavController(R.id.fragment_navhost_main).navigate(R.id.homeFragment)
+                }
+            })
+            actionBar.customView
+        }
     }
+
 
     //options menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -77,8 +96,8 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp()
     }
 
-    public fun getItemsList(): String{
-        return tagsList;
+    fun getItemsList(): String{
+        return tagsList
     }
 
 }
