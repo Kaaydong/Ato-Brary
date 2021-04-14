@@ -1,10 +1,8 @@
 package com.example.to_brary
 
-import android.app.ActionBar
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -13,7 +11,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import java.lang.reflect.Field
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,16 +27,17 @@ class MainActivity : AppCompatActivity() {
 
         val actionBar = actionBar
         if(actionBar != null){
-            actionBar.setDisplayShowTitleEnabled(false)
+            actionBar.setDisplayShowTitleEnabled(true)
             actionBar.setDisplayShowCustomEnabled(true)
             var customView = layoutInflater.inflate(R.layout.actionbar_title, null)
-            var customTitle = customView.findViewById<>(R.id.action_bar_title)
-            customTitle.setOnClickListener(View.OnClickListener {
+            var customTitle = customView.findViewById<TextView>(R.id.action_bar_title)
+
+            customTitle.setOnClickListener {
                 @Override
-                fun onClick(view: View){
+                fun onClick(view: View) {
                     findNavController(R.id.fragment_navhost_main).navigate(R.id.homeFragment)
                 }
-            })
+            }
             actionBar.customView
         }
     }
@@ -62,17 +60,17 @@ class MainActivity : AppCompatActivity() {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                val bundle = Bundle()
-                bundle.putString("listOfTags", query)
 
                 tagsList = query
-                findNavController(R.id.fragment_navhost_main).navigate(R.id.homeFragment, bundle)
+                findNavController(R.id.fragment_navhost_main).navigate(R.id.homeFragment)
 
                 return false
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-
+                if (newText.length === 0) {
+                    goToDefaultHomeFragment()
+                }
                 return false
             }
         })
@@ -100,5 +98,11 @@ class MainActivity : AppCompatActivity() {
         return tagsList
     }
 
+    fun goToDefaultHomeFragment() {
+        tagsList = "thereIsNoGodDamnWaySomeoneIsPuttingThisIntoTHeTextView"
+        findNavController(R.id.fragment_navhost_main).navigate(R.id.homeFragment)
+    }
 }
+
+
 
