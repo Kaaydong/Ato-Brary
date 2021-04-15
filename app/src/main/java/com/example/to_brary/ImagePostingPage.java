@@ -1,12 +1,19 @@
 package com.example.to_brary;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -50,6 +57,8 @@ public class ImagePostingPage extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private int STORAGE_PERMISSION_CODE = 1;
+
     private ImageView previewImage;
     private Bitmap imageBitmap;
     private String bitmapName;
@@ -92,6 +101,9 @@ public class ImagePostingPage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_image_posting_page, container, false);
+
+        checkOrRequestionPermission();
+
         previewImage = rootView.findViewById(R.id.imageView_preview_postimage);
         imageSelectionButton = rootView.findViewById(R.id.button_uploader_postimage);
         postingButton = rootView.findViewById(R.id.button_post_postimage);
@@ -249,6 +261,62 @@ public class ImagePostingPage extends Fragment {
             return false;
 
         return true;
+    }
+
+    private void checkOrRequestionPermission()
+    {
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
+            == PackageManager.PERMISSION_GRANTED)
+        {
+            Log.i("Permissions", "Access to photos already granted");
+        }
+        else
+        {
+            requestStoragePermission();
+        }
+    }
+
+    private void requestStoragePermission()
+    {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE))
+        {
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("Permission Needed")
+                    .setMessage("Access to Photos Needed for Image Uploading")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
+        }
+        else
+        {
+            ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        if (requestCode == STORAGE_PERMISSION_CODE)
+        {
+            if (grantResults.length > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                Toast.makeText(getActivity(), "App Has Been Given Access to Photos", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(getActivity(), "App Has Been Denied Access to Photos", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
 
