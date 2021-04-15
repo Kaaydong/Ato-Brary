@@ -33,10 +33,8 @@ class MainActivity : AppCompatActivity() {
             var customTitle = customView.findViewById<TextView>(R.id.action_bar_title)
 
             customTitle.setOnClickListener {
-                @Override
-                fun onClick(view: View) {
-                    findNavController(R.id.fragment_navhost_main).navigate(R.id.homeFragment)
-                }
+                findNavController(R.id.fragment_navhost_main).navigate(R.id.homeFragment)
+
             }
             actionBar.customView
         }
