@@ -293,30 +293,33 @@ public class ImagePostingPage extends Fragment {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
+                            Navigation.findNavController(getActivity(), R.id.fragment_navhost_main).navigateUp();
                         }
                     })
                     .create().show();
         }
         else
         {
-            ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+            //requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
-    {
-        if (requestCode == STORAGE_PERMISSION_CODE)
-        {
-            if (grantResults.length > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            {
-                Toast.makeText(getActivity(), "App Has Been Given Access to Photos", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-                Toast.makeText(getActivity(), "App Has Been Denied Access to Photos", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//
+//                if (requestCode == STORAGE_PERMISSION_CODE)
+//        {
+//            if (grantResults.length > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+//            {
+//                Toast.makeText(getActivity(), "App Has Been Given Access to Photos", Toast.LENGTH_SHORT).show();
+//            }
+//            else
+//            {
+//                Toast.makeText(getActivity(), "App Has Been Denied Access to Photos", Toast.LENGTH_SHORT).show();
+//                Navigation.findNavController(getActivity(), R.id.fragment_navhost_main).navigateUp();
+//            }
+//        }
+//    }
 }
 
