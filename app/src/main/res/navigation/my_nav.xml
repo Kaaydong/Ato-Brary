@@ -8,7 +8,6 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.to_brary.HomeFragment"
-        android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_imageViewFragment"
@@ -17,7 +16,6 @@
     <fragment
         android:id="@+id/imageViewFragment"
         android:name="com.example.to_brary.ImageViewFragment"
-        android:label="fragment_image_view"
         tools:layout="@layout/fragment_image_view">
         <action
             android:id="@+id/action_imageViewFragment_to_homeFragment"
@@ -26,12 +24,10 @@
     <fragment
         android:id="@+id/loginPage"
         android:name="com.example.to_brary.LoginPage"
-        android:label="fragment_login_page"
         tools:layout="@layout/fragment_login_page" />
     <fragment
         android:id="@+id/imagePostingPage"
         android:name="com.example.to_brary.ImagePostingPage"
-        android:label="fragment_image_posting_page"
         tools:layout="@layout/fragment_image_posting_page" >
         <action
             android:id="@+id/action_imagePostingPage_to_imageViewFragment"
@@ -40,6 +36,5 @@
     <fragment
         android:id="@+id/tagCreationPage"
         android:name="com.example.to_brary.TagCreationPage"
-        android:label="fragment_tag_creation_page"
         tools:layout="@layout/fragment_tag_creation_page" />
 </navigation>

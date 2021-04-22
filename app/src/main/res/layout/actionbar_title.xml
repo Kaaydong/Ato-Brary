@@ -11,10 +11,10 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_home" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/action_bar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Āto-Brary" />
+        android:text="Āto-Brary" />-->
 
 </LinearLayout>
