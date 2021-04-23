@@ -9,14 +9,21 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:background="@color/pinkDark"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="@color/pinkDark"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageButton
+            android:id="@+id/toolbar_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:baselineAlignBottom="true"
+            android:backgroundTint="@color/pinkDark"
+            android:src="@drawable/ic_home" />
 
         <!--<TextView
             android:id="@+id/custom_title"

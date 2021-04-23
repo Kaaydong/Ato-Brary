@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         toolbar.title = "Āto-Brary"
         toolbar.setTitleTextColor(Color.WHITE)
         toolbar.overflowIcon?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
+
         setSupportActionBar(toolbar)
 
         val navController = this.findNavController(R.id.fragment_navhost_main)
