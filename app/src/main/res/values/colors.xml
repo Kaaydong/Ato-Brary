@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorPrimary">@color/pinkDark</color>
+    <color name="colorPrimaryDark">#AE91FF</color>
     <color name="colorAccent">#03DAC5</color>
 
     <color name="peach">#ffe4d5</color>
@@ -9,4 +9,5 @@
     <color name="pink">#ffbecf</color>
     <color name="pinkDark">#f4acb4</color>
     <color name="pinkLight">#f9bec2</color>
+    <color name="white">#ffffff</color>
 </resources>

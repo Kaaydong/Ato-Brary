@@ -2,13 +2,18 @@ package com.example.to_brary
 
 import android.app.SearchManager
 import android.content.Context
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.SearchView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 
@@ -22,6 +27,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //supportActionBar?.title = "Āto-Brary"
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        toolbar.title = "Āto-Brary"
+        toolbar.setTitleTextColor(Color.WHITE)
+        toolbar.overflowIcon?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
+
+        toolbar.setOnClickListener {
+            Toast.makeText(this,"this works somehow", Toast.LENGTH_SHORT).show()
+        }
+
+        setSupportActionBar(toolbar)
+
         val navController = this.findNavController(R.id.fragment_navhost_main)
         NavigationUI.setupActionBarWithNavController(this, navController)
 
@@ -33,10 +51,8 @@ class MainActivity : AppCompatActivity() {
             var customTitle = customView.findViewById<TextView>(R.id.action_bar_title)
 
             customTitle.setOnClickListener {
-                @Override
-                fun onClick(view: View) {
-                    findNavController(R.id.fragment_navhost_main).navigate(R.id.homeFragment)
-                }
+                findNavController(R.id.fragment_navhost_main).navigate(R.id.homeFragment)
+
             }
             actionBar.customView
         }
