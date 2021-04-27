@@ -7,15 +7,14 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,9 +33,8 @@ class MainActivity : AppCompatActivity() {
         toolbar.setTitleTextColor(Color.WHITE)
         toolbar.overflowIcon?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
 
-        toolbar.setOnClickListener {
-            Toast.makeText(this,"this works somehow", Toast.LENGTH_SHORT).show()
-        }
+        //can't set onClickListener for logo
+
 
         setSupportActionBar(toolbar)
 
