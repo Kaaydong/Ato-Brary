@@ -14,7 +14,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,9 +32,9 @@ class MainActivity : AppCompatActivity() {
         toolbar.title = "Āto-Brary"
         toolbar.setTitleTextColor(Color.WHITE)
         toolbar.overflowIcon?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
+        //supportActionBar?.setDisplayShowTitleEnabled(false)
 
         //can't set onClickListener for logo
-
 
         setSupportActionBar(toolbar)
 
@@ -46,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         if(actionBar != null){
             actionBar.setDisplayShowTitleEnabled(true)
             actionBar.setDisplayShowCustomEnabled(true)
-            var customView = layoutInflater.inflate(R.layout.actionbar_title, null)
+            /*var customView = layoutInflater.inflate(R.layout.actionbar_title, null)
             var customTitle = customView.findViewById<TextView>(R.id.action_bar_title)
 
             customTitle.setOnClickListener {
@@ -54,6 +53,8 @@ class MainActivity : AppCompatActivity() {
 
             }
             actionBar.customView
+
+            mr shorr basically said just use the right home button so not more home button on left side*/
         }
     }
 
