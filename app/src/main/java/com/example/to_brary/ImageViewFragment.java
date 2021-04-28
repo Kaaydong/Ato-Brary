@@ -1,14 +1,18 @@
 package com.example.to_brary;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -124,10 +128,27 @@ public class ImageViewFragment extends Fragment {
                 File directory = new File(destPath + "/Ato-Brary Image/");
                 directory.mkdir();
                 File file = new File(directory, System.currentTimeMillis() + ".jpg");
-                try{FileOutputStream outputStream = new FileOutputStream(file);
-                    bitmap.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
-                    Toast.makeText(getActivity(),"Image Has Successfully Been Downloaded",Toast.LENGTH_SHORT).show();
+                try{
+                    try {
+                        file.createNewFile();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
+                    FileOutputStream outputStream = new FileOutputStream(file);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
+                    try {
+                        outputStream.flush();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        outputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(getActivity(),"Image Has Successfully Been Downloaded",Toast.LENGTH_SHORT).show();
+                    Log.v(file.getPath(),file.getName());
+                }
                 catch (FileNotFoundException e){
                     e.printStackTrace();
                     Toast.makeText(getActivity(),"Image Was Not Downloaded",Toast.LENGTH_SHORT).show();
@@ -137,5 +158,16 @@ public class ImageViewFragment extends Fragment {
             }
         });
     }
+    public void downloadImageToPublicStorage()
+    {
+        ContentResolver resolver = getActivity().getContentResolver();
 
+        Uri imageCollection;
+        imageCollection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+
+        ContentValues imageValues = new ContentValues();
+        imageValues.put(MediaStore.Images.Media.DISPLAY_NAME, System.currentTimeMillis() + ".jpg");
+
+        Uri imageThing = resolver.insert(imageCollection, imageValues);
+    }
 }
