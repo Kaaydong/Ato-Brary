@@ -129,7 +129,9 @@ public class HomeFragment extends Fragment {
 
                 String listFromActvity = ((MainActivity)getActivity()).getItemsList();
 
+
                 if(listFromActvity != "thereIsNoGodDamnWaySomeoneIsPuttingThisIntoTHeTextView") {
+                    listFromActvity = listFromActvity.toLowerCase();
                     ArrayList<String> tagsList = stringsToJson(listFromActvity);
 
                     for(int i = 0; i < tagsList.size();i++)
@@ -198,7 +200,7 @@ public class HomeFragment extends Fragment {
 
         while (text.indexOf(" ") != -1)
         {
-            String tag = text.substring(0,text.indexOf(" ") + 1);
+            String tag = text.substring(0,text.indexOf(" "));
             arrayList.add(tag);
             text = text.substring(text.indexOf(" ") + 1);
         }

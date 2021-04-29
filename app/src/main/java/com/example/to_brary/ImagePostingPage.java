@@ -226,7 +226,7 @@ public class ImagePostingPage extends Fragment {
     {
         ArrayList<String> arrayList = new ArrayList<>();
 
-        String text = textView.getText().toString();
+        String text = textView.getText().toString().toLowerCase();
 
         while (text.indexOf(" ") == 0)
         {
