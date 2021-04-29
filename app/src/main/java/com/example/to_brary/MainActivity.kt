@@ -7,9 +7,7 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
@@ -28,15 +26,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //supportActionBar?.title = "Āto-Brary"
+        //trying to commit to github from school computer
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         toolbar.title = "Āto-Brary"
         toolbar.setTitleTextColor(Color.WHITE)
         toolbar.overflowIcon?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
+        //supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        toolbar.setOnClickListener {
-            Toast.makeText(this,"this works somehow", Toast.LENGTH_SHORT).show()
-        }
+        //can't set onClickListener for logo
 
         setSupportActionBar(toolbar)
 
@@ -47,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         if(actionBar != null){
             actionBar.setDisplayShowTitleEnabled(true)
             actionBar.setDisplayShowCustomEnabled(true)
-            var customView = layoutInflater.inflate(R.layout.actionbar_title, null)
+            /*var customView = layoutInflater.inflate(R.layout.actionbar_title, null)
             var customTitle = customView.findViewById<TextView>(R.id.action_bar_title)
 
             customTitle.setOnClickListener {
@@ -55,6 +53,8 @@ class MainActivity : AppCompatActivity() {
 
             }
             actionBar.customView
+
+            mr shorr basically said just use the right home button so not more home button on left side*/
         }
     }
 
