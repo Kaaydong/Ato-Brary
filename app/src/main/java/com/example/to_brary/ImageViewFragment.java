@@ -1,14 +1,21 @@
 package com.example.to_brary;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +33,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.util.Objects;
 
 import static com.backendless.rt.RTTypes.log;
 
@@ -120,22 +129,54 @@ public class ImageViewFragment extends Fragment {
                 BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
                 Bitmap bitmap = drawable.getBitmap();
 
-                String destPath = getActivity().getExternalFilesDir(null).getAbsolutePath();
-                File directory = new File(destPath + "/Ato-Brary Image/");
-                directory.mkdir();
-                File file = new File(directory, System.currentTimeMillis() + ".jpg");
-                try{FileOutputStream outputStream = new FileOutputStream(file);
-                    bitmap.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
-                    Toast.makeText(getActivity(),"Image Has Successfully Been Downloaded",Toast.LENGTH_SHORT).show();
-                    }
-                catch (FileNotFoundException e){
+                try {
+                    saveBitmap(getActivity(),bitmap,Bitmap.CompressFormat.JPEG,"image/jpeg",System.currentTimeMillis()+".jpg");
+                } catch (IOException e) {
                     e.printStackTrace();
-                    Toast.makeText(getActivity(),"Image Was Not Downloaded",Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         });
     }
 
+    @NonNull
+    public Uri saveBitmap(@NonNull final Context context,@NonNull final Bitmap bitmap,
+                          @NonNull final Bitmap.CompressFormat format,
+                          @NonNull final String mimeType,
+                          @NonNull final String displayName) throws IOException {
+
+        final ContentValues values = new ContentValues();
+        values.put(MediaStore.MediaColumns.DISPLAY_NAME, displayName);
+        values.put(MediaStore.MediaColumns.MIME_TYPE, mimeType);
+        values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DCIM);
+
+        final ContentResolver resolver = context.getContentResolver();
+        Uri uri = null;
+
+        try {
+            final Uri contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+            uri = resolver.insert(contentUri, values);
+
+            if (uri == null)
+                throw new IOException("Failed to create new MediaStore record.");
+
+            try (final OutputStream stream = resolver.openOutputStream(uri)) {
+                if (stream == null)
+                    throw new IOException("Failed to open output stream.");
+
+                if (!bitmap.compress(format, 95, stream))
+                    throw new IOException("Failed to save bitmap.");
+            }
+
+            return uri;
+        }
+        catch (IOException e) {
+
+            if (uri != null) {
+                // Don't leave an orphan entry in the MediaStore
+                resolver.delete(uri, null, null);
+            }
+
+            throw e;
+        }
+    }
 }
