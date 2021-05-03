@@ -126,9 +126,7 @@ public class HomeFragment extends Fragment {
 
                 imageList = response;
 
-
                 String listFromActvity = ((MainActivity)getActivity()).getItemsList();
-
 
                 if(listFromActvity != "thereIsNoGodDamnWaySomeoneIsPuttingThisIntoTHeTextView") {
                     listFromActvity = listFromActvity.toLowerCase();
@@ -163,6 +161,7 @@ public class HomeFragment extends Fragment {
     public void createCustomImageList(String searchTerm)
     {
         String word = searchTerm;
+        word = "\"" + word + "\"";
         ArrayList<Image> newImageList = new ArrayList<>();
 
         for (int i = 0; i < imageList.size();i++)
@@ -181,30 +180,37 @@ public class HomeFragment extends Fragment {
     public ArrayList<String> stringsToJson(String text)
     {
         ArrayList<String> arrayList = new ArrayList<>();
+        String word = text;
 
-
-        if(text.indexOf(" ") == -1)
+        while (word.indexOf(" ") == 0)
         {
-            arrayList.add(text);
+            word = word.substring(1);
         }
 
-        while (text.indexOf(" ") == 0)
+        while (word.endsWith(" "))
         {
-            text = text.substring(1);
+            word = word.substring(0, word.length()-1);
         }
 
-        while (text.indexOf(" ") == text.length())
+        if(word.indexOf(" ") == -1)
         {
-            text = text.substring(0, text.length() -1);
+            arrayList.add(word);
+            return arrayList;
         }
 
-        while (text.indexOf(" ") != -1)
+
+        while (word.indexOf(" ") != -1)
         {
-            String tag = text.substring(0,text.indexOf(" "));
+            String tag = word.substring(0,word.indexOf(" "));
             arrayList.add(tag);
-            text = text.substring(text.indexOf(" ") + 1);
+            word = word.substring(word.indexOf(" ")+1);
         }
 
+        if(word.indexOf(" ") == -1)
+        {
+            arrayList.add(word);
+            return arrayList;
+        }
         return  arrayList;
     }
 }
