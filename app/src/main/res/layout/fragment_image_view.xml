@@ -61,11 +61,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_imagePage_text2"
+            app:layout_constraintTop_toBottomOf="@+id/textView_imagePage_copyrightHeader"
             tools:text="copyright" />
 
         <TextView
-            android:id="@+id/textView_imagePage_text2"
+            android:id="@+id/textView_imagePage_copyrightHeader"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -86,7 +86,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_imagePage_text3"
+            app:layout_constraintTop_toBottomOf="@+id/textView_imagePage_charactersHeader"
             tools:text="characters" />
 
         <TextView
@@ -97,11 +97,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_imagePage_text4"
+            app:layout_constraintTop_toBottomOf="@+id/textView_imagePage_descriptionsHeader"
             tools:text="descriptions" />
 
         <TextView
-            android:id="@+id/textView_imagePage_text4"
+            android:id="@+id/textView_imagePage_descriptionsHeader"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -115,7 +115,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView_imagePage_characters" />
 
         <TextView
-            android:id="@+id/textView_imagePage_text3"
+            android:id="@+id/textView_imagePage_charactersHeader"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -137,11 +137,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_imagePage_text"
+            app:layout_constraintTop_toBottomOf="@+id/textView_imagePage_artistsHeader"
             tools:text="artists" />
 
         <TextView
-            android:id="@+id/textView_imagePage_text"
+            android:id="@+id/textView_imagePage_artistsHeader"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
