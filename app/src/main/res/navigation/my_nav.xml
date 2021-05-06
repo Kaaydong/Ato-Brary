@@ -37,4 +37,9 @@
         android:id="@+id/tagCreationPage"
         android:name="com.example.to_brary.TagCreationPage"
         tools:layout="@layout/fragment_tag_creation_page" />
+    <fragment
+        android:id="@+id/tagListPage"
+        android:name="com.example.to_brary.TagListPage"
+        tools:layout="@layout/fragment_tag_list_page"/>
+    <fragment android:id="@+id/settings" />
 </navigation>
