@@ -10,24 +10,24 @@
 
     <EditText
         android:id="@+id/edittext_taginput_tagcreation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="101dp"
+        android:layout_width="230dp"
+        android:layout_height="39dp"
         android:layout_marginTop="124dp"
-        android:layout_marginEnd="101dp"
+        android:background="@drawable/button_border"
         android:ems="10"
-        android:hint="Insert Tag"
+        android:hint=" Insert Tag"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinner_tagcategory_tagcreation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="244dp"
+        android:layout_height="40dp"
         android:layout_marginTop="79dp"
+        android:background="@drawable/button_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edittext_taginput_tagcreation" />

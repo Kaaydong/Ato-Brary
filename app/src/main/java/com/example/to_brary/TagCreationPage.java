@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -73,8 +74,22 @@ public class TagCreationPage extends Fragment {
         uploadTagButton = rootview.findViewById(R.id.button_uploadtag_tagcreation);
 
         tagCategorySpinner = rootview.findViewById(R.id.spinner_tagcategory_tagcreation);
-        String[] items = new String[]{"Artists","Copyright","Characters","Details"};
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),R.array.spinner_tag_items, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        tagCategorySpinner.setAdapter(adapter);
+
+        tagCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+        }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         return rootview;
-    }
+}
 }

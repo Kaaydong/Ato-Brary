@@ -135,7 +135,7 @@ public class ImageViewFragment extends Fragment {
 
                 try {
                     saveBitmap(getActivity(),bitmap,Bitmap.CompressFormat.JPEG,"image/jpeg",System.currentTimeMillis()+".jpg");
-                    Toast.makeText(getActivity(),"Image Downloaded Successful",Toast.LENGTH_SHORT);
+                    Toast.makeText(getActivity(),"Image Downloaded Successful",Toast.LENGTH_SHORT).show();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
