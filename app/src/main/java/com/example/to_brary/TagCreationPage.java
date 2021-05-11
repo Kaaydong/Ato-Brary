@@ -25,6 +25,8 @@ import com.example.to_brary.data_classes.DetailsTags;
 import com.example.to_brary.data_classes.Image;
 import com.google.gson.Gson;
 
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link TagCreationPage#newInstance} factory method to
@@ -193,5 +195,27 @@ public void postTag(int position, String tagName)
             return false;
 
         return true;
+    }
+
+    private boolean checkIfTagExists(final String tag){
+        boolean exists;
+        Backendless.Data.of(ArtistsTags.class).find(new AsyncCallback<List<ArtistsTags>>() {
+            @Override
+            public void handleResponse(List<ArtistsTags> response) {
+                for(int i=0; i < response.size();i++)
+                {
+                    if(response.get(i).equals(tag)){
+
+                }
+                }
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+
+            }
+        });
+
+        return false;
     }
 }
