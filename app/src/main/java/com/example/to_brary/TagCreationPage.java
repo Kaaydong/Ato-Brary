@@ -3,6 +3,7 @@ package com.example.to_brary;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.backendless.Backendless;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
+import com.example.to_brary.data_classes.ArtistsTags;
+import com.example.to_brary.data_classes.CharactersTags;
+import com.example.to_brary.data_classes.CopyrightsTags;
+import com.example.to_brary.data_classes.DetailsTags;
+import com.example.to_brary.data_classes.Image;
+import com.google.gson.Gson;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,9 +92,20 @@ public class TagCreationPage extends Fragment {
 
         tagCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-
+            public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
+                uploadTagButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(isEmpty(insertTagEditText))
+                        {
+                            Toast.makeText(getActivity(),"Please Insert Tag To Textbox",Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            postTag(position,insertTagEditText.getText().toString());
+                        }
+                    }
+                });
         }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -92,4 +115,83 @@ public class TagCreationPage extends Fragment {
 
         return rootview;
 }
+
+public void postTag(int position, String tagName)
+{
+
+    if(position == 0)
+    {
+        ArtistsTags dataClass = new ArtistsTags();
+        dataClass.setArtist(tagName);
+        Backendless.Data.of(ArtistsTags.class).save(dataClass, new AsyncCallback<ArtistsTags>() {
+            @Override
+            public void handleResponse(ArtistsTags response) {
+                Toast.makeText(getActivity(),"TAG SUCCESSFULLY UPLOADED",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+                Toast.makeText(getActivity(),"TAG WAS NOT UPLOADED",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    else if(position == 1)
+    {
+        CopyrightsTags dataClass = new CopyrightsTags();
+        dataClass.setCopyright(tagName);
+        Backendless.Data.of(CopyrightsTags.class).save(dataClass, new AsyncCallback<CopyrightsTags>() {
+            @Override
+            public void handleResponse(CopyrightsTags response) {
+                Toast.makeText(getActivity(),"TAG SUCCESSFULLY UPLOADED",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+                Toast.makeText(getActivity(),"TAG WAS NOT UPLOADED",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    else if (position == 2)
+    {
+        CharactersTags dataClass = new CharactersTags();
+        dataClass.setCharacter(tagName);
+        Backendless.Data.of(CharactersTags.class).save(dataClass, new AsyncCallback<CharactersTags>() {
+            @Override
+            public void handleResponse(CharactersTags response) {
+                Toast.makeText(getActivity(),"TAG SUCCESSFULLY UPLOADED",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+                Toast.makeText(getActivity(),"TAG WAS NOT UPLOADED",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    else if (position == 3)
+    {
+        DetailsTags dataClass = new DetailsTags();
+        dataClass.setDetail(tagName);
+
+        Backendless.Data.of(DetailsTags.class).save(dataClass, new AsyncCallback<DetailsTags>() {
+            @Override
+            public void handleResponse(DetailsTags response) {
+                Toast.makeText(getActivity(),"TAG SUCCESSFULLY UPLOADED",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+                Toast.makeText(getActivity(),"TAG WAS NOT UPLOADED",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    getActivity().getFragmentManager().popBackStack();
+    Navigation.findNavController(getActivity(), R.id.fragment_navhost_main).navigate(R.id.action_tagCreationPage_to_homeFragment);
+}
+
+    private boolean isEmpty(EditText etText) {
+        if (etText.getText().toString().trim().length() > 0)
+            return false;
+
+        return true;
+    }
 }
