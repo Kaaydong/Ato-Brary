@@ -224,7 +224,6 @@ public class ImagePostingPage extends Fragment {
 
         while (text.indexOf(" ") == text.length())
         {
-            Log.e("THIS HAPPENS","HELLO");
             text = text.substring(0, text.length() - 1);
         }
 

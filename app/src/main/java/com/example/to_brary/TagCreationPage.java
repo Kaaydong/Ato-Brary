@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.example.to_brary.data_classes.DetailsTags;
 import com.example.to_brary.data_classes.Image;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,6 +44,8 @@ public class TagCreationPage extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ArrayList<String> listOfTags;
 
     EditText insertTagEditText;
     Spinner tagCategorySpinner;
@@ -84,6 +88,8 @@ public class TagCreationPage extends Fragment {
         // Inflate the layout for this fragment
         final View rootview = inflater.inflate(R.layout.fragment_tag_creation_page, container, false);
 
+        createListofTags();
+
         insertTagEditText = rootview.findViewById(R.id.edittext_taginput_tagcreation);
         uploadTagButton = rootview.findViewById(R.id.button_uploadtag_tagcreation);
 
@@ -98,13 +104,31 @@ public class TagCreationPage extends Fragment {
                 uploadTagButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        String tag = insertTagEditText.getText().toString();
+
                         if(isEmpty(insertTagEditText))
                         {
-                            Toast.makeText(getActivity(),"Please Insert Tag To Textbox",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(),"Please Insert Tag To Textbox",Toast.LENGTH_LONG).show();
                         }
                         else
                         {
-                            postTag(position,insertTagEditText.getText().toString());
+                           tag = removeAllSpaces(tag);
+                           tag = tag.toLowerCase();
+                        }
+
+                        if(isEmpty(insertTagEditText)) {
+                        }
+                        else if(checkIfSpacesInbetween(tag))
+                        {
+                            Toast.makeText(getActivity(),"Please replace spaces with underscores _ ", Toast.LENGTH_LONG).show();
+                        }
+                        else if(checkIfTagExists(tag))
+                        {
+                            Toast.makeText(getActivity(), "Tag Already Exists",Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            postTag(position,tag);
                         }
                     }
                 });
@@ -197,25 +221,94 @@ public void postTag(int position, String tagName)
         return true;
     }
 
-    private boolean checkIfTagExists(final String tag){
-        boolean exists;
+    private boolean checkIfTagExists(String tag){
+        int counter = 0;
+        for(int i=0; i<listOfTags.size();i++)
+        {
+            if(tag.equals(listOfTags.get(i)))
+            {
+                return true;
+            }
+            counter++;
+        }
+        Log.e("HELLO",counter+"");
+        return false;
+    }
+
+    private void createListofTags()
+    {
+        listOfTags = new ArrayList<>();
+        Backendless.Data.of(CharactersTags.class).find(new AsyncCallback<List<CharactersTags>>() {
+            @Override
+            public void handleResponse(List<CharactersTags> response) {
+                for(int i=0; i < response.size();i++)
+                {
+                    listOfTags.add(response.get(i).getCharacter());
+                }
+            }
+            @Override
+            public void handleFault(BackendlessFault fault) {
+            }
+        });
         Backendless.Data.of(ArtistsTags.class).find(new AsyncCallback<List<ArtistsTags>>() {
             @Override
             public void handleResponse(List<ArtistsTags> response) {
                 for(int i=0; i < response.size();i++)
                 {
-                    if(response.get(i).equals(tag)){
-
-                }
+                    listOfTags.add(response.get(i).getArtist());
                 }
             }
-
             @Override
             public void handleFault(BackendlessFault fault) {
-
             }
         });
+        Backendless.Data.of(CopyrightsTags.class).find(new AsyncCallback<List<CopyrightsTags>>() {
+            @Override
+            public void handleResponse(List<CopyrightsTags> response) {
+                for(int i=0; i < response.size();i++)
+                {
+                    listOfTags.add(response.get(i).getCopyright());
+                }
+            }
+            @Override
+            public void handleFault(BackendlessFault fault) {
+            }
+        });
+        Backendless.Data.of(DetailsTags.class).find(new AsyncCallback<List<DetailsTags>>() {
+            @Override
+            public void handleResponse(List<DetailsTags> response) {
+                for(int i=0; i < response.size();i++)
+                {
+                    listOfTags.add(response.get(i).getDetail());
+                }
+            }
+            @Override
+            public void handleFault(BackendlessFault fault) {
+            }
+        });
+    }
 
+    private String removeAllSpaces(String rawEditTextString)
+    {
+        String text = rawEditTextString;
+        while (text.indexOf(" ") == 0)
+        {
+            text = text.substring(1);
+        }
+
+        while (text.indexOf(" ") == text.length())
+        {
+            text = text.substring(0, text.length() - 1);
+        }
+        return text;
+    }
+
+    private boolean checkIfSpacesInbetween(String stringAfterRemoveSpace)
+    {
+        if(stringAfterRemoveSpace.indexOf(" ") != -1)
+        {
+            return true;
+        }
         return false;
     }
 }
