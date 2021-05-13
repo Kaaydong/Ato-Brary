@@ -134,9 +134,7 @@ public class TagCreationPage extends Fragment {
                 });
         }
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
 
         return rootview;
@@ -144,7 +142,6 @@ public class TagCreationPage extends Fragment {
 
 public void postTag(int position, String tagName)
 {
-
     if(position == 0)
     {
         ArtistsTags dataClass = new ArtistsTags();
@@ -229,9 +226,7 @@ public void postTag(int position, String tagName)
             {
                 return true;
             }
-            counter++;
         }
-        Log.e("HELLO",counter+"");
         return false;
     }
 
