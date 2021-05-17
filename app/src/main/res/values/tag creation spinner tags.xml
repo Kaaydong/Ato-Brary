@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_tag_items">
+        <item>"Artist"</item>
+        <item>"Copyright"</item>
+        <item>"Character"</item>
+        <item>"Details"</item>
+    </string-array>
+</resources>

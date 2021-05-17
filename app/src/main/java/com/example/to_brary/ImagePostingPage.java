@@ -10,7 +10,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -26,21 +25,18 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.files.BackendlessFile;
+import com.example.to_brary.data_classes.Image;
 import com.google.gson.Gson;
-
-import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -186,13 +182,6 @@ public class ImagePostingPage extends Fragment {
                 theImage.setCharacters(StringsToJson(charactersEditText));
                 theImage.setDetails(StringsToJson(descriptionsEditText));
 
-                HashMap hashMap = new HashMap();
-                hashMap.put("imageFile", response.getFileURL());
-                hashMap.put("artists", StringsToJson(artistsEditText));
-                hashMap.put("copyright", StringsToJson(copyrightEditText));
-                hashMap.put("characters", StringsToJson(charactersEditText));
-                hashMap.put("details", StringsToJson(descriptionsEditText));
-
                 Backendless.Data.of(Image.class).save(theImage, new AsyncCallback<Image>() {
                     @Override
                     public void handleResponse(Image response) {
@@ -235,7 +224,6 @@ public class ImagePostingPage extends Fragment {
 
         while (text.indexOf(" ") == text.length())
         {
-            Log.e("THIS HAPPENS","HELLO");
             text = text.substring(0, text.length() - 1);
         }
 

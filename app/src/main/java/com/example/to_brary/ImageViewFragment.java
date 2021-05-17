@@ -4,11 +4,8 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,7 +13,6 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,23 +21,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.to_brary.data_classes.Image;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import static com.backendless.rt.RTTypes.log;
 
 
 /**
@@ -135,7 +123,7 @@ public class ImageViewFragment extends Fragment {
 
                 try {
                     saveBitmap(getActivity(),bitmap,Bitmap.CompressFormat.JPEG,"image/jpeg",System.currentTimeMillis()+".jpg");
-                    Toast.makeText(getActivity(),"Image Downloaded Successful",Toast.LENGTH_SHORT);
+                    Toast.makeText(getActivity(),"Image Downloaded Successful",Toast.LENGTH_SHORT).show();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
