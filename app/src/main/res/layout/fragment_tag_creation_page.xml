@@ -41,7 +41,6 @@
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:text="Upload Tag"
-        android:background="@drawable/button_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
