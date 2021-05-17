@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.loginPage -> findNavController(R.id.fragment_navhost_main).navigate(R.id.loginPage)
+            //R.id.loginPage -> findNavController(R.id.fragment_navhost_main).navigate(R.id.loginPage)
             R.id.imagePostingPage -> findNavController(R.id.fragment_navhost_main).navigate(R.id.imagePostingPage)
             R.id.tagCreationPage -> findNavController(R.id.fragment_navhost_main).navigate(R.id.tagCreationPage)
             R.id.home -> findNavController(R.id.fragment_navhost_main).navigate(R.id.homeFragment)

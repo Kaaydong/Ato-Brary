@@ -16,12 +16,12 @@
     <item
         android:id="@+id/menu_options_settingsTab"
         android:title="Settings" />
-    <item
+    <!--<item
         android:id="@+id/loginPage"
         android:title="Login" />
     <item
         android:id="@+id/menu_options_logout"
-        android:title="Logout" />
+        android:title="Logout" />-->
     <item
         android:id="@+id/imagePostingPage"
         android:title="Image Posting" />
