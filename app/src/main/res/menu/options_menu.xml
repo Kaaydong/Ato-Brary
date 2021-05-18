@@ -5,9 +5,9 @@
     <item
         android:id="@+id/search"
         android:title="Search Bar"
-        android:icon="@drawable/ic_search"
+        android:icon="@drawable/ic_action_action_search"
         app:showAsAction="always|collapseActionView"
-        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+        app:actionViewClass="com.miguelcatalan.materialsearchview.MaterialSearchView" />
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_home"
@@ -28,4 +28,9 @@
     <item
         android:id="@+id/tagCreationPage"
         android:title="Tag Creation" />
+<!--    <item-->
+<!--        android:id="@+id/action_search"-->
+<!--        android:orderInCategory="100"-->
+<!--        android:title="@string/abc_search_hint"-->
+<!--        app:showAsAction="always" />-->
 </menu>

@@ -22,13 +22,13 @@ public class Image {
     private String imageFile;
     private String originalImageSource;
 
-
     public String getArtists() {
         return artists;
     }
 
     public void setArtists(String artists) {
         this.artists = artists;
+
     }
 
     public String getCopyright() {

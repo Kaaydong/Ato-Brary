@@ -7,13 +7,13 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.miguelcatalan.materialsearchview.MaterialSearchView
 
 class MainActivity : AppCompatActivity() {
 
@@ -63,18 +63,22 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.options_menu, menu)
 
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        if (menu != null) {
-            (menu.findItem(R.id.search).actionView as SearchView).apply {
-                setSearchableInfo(searchManager.getSearchableInfo(componentName))
-            }
-        }
+//        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+//        if (menu != null) {
+//            (menu.findItem(R.id.search).actionView as SearchView).apply {
+//                setSearchableInfo(searchManager.getSearchableInfo(componentName))
+//            }
+//        }
 
         val menuItem = menu!!.findItem(R.id.search)
-        val searchView = menuItem.actionView as SearchView
-        searchView.queryHint = "Insert Tags"
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        val searchView = menuItem.actionView as MaterialSearchView
+
+        val array = arrayOf("potato","cat","fluffy")
+
+        searchView.setHint("Insert Tags")
+        searchView.setSuggestions(array)
+        searchView.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
 
                 tagsList = query
@@ -88,6 +92,16 @@ class MainActivity : AppCompatActivity() {
                     goToDefaultHomeFragment()
                 }
                 return false
+            }
+        })
+
+        searchView.setOnSearchViewListener(object : MaterialSearchView.SearchViewListener {
+            override fun onSearchViewShown() {
+
+            }
+
+            override fun onSearchViewClosed() {
+
             }
         })
 
