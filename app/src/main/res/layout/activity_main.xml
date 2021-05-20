@@ -15,10 +15,6 @@
         android:theme="@style/ToolbarTheme"
         tools:ignore="MissingConstraints">
 
-        <com.miguelcatalan.materialsearchview.MaterialSearchView
-            android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 <!--        <ImageButton-->
 <!--            android:id="@+id/toolbar_button"-->
 <!--            style="@style/Widget.AppCompat.Button.Borderless"-->
@@ -40,6 +36,8 @@
 <!--            android:textStyle="normal"-->
 <!--            tools:layout_editor_absoluteX="16dp" />-->
 
+
+
     </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout
@@ -56,6 +54,5 @@
             android:layout_height="match_parent"
             app:defaultNavHost="true"
             app:navGraph="@navigation/my_nav" />
-
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
