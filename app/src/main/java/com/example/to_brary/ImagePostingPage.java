@@ -238,6 +238,10 @@ public class ImagePostingPage extends Fragment {
             String tag = text.substring(0,text.indexOf(" "));
             arrayList.add(tag);
             text = text.substring(text.indexOf(" ") + 1);
+            if(text.indexOf(" ")==-1)
+            {
+                arrayList.add(text);
+            }
         }
 
         String json = new Gson().toJson(arrayList);
@@ -288,7 +292,7 @@ public class ImagePostingPage extends Fragment {
         }
         else
         {
-            //requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+          requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
         }
     }
 
