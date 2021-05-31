@@ -17,7 +17,7 @@
             android:id="@+id/button_imagePage_downloadImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/button_border"
             android:text="Download"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/button_border"
             android:text="Save Image"
             app:layout_constraintEnd_toStartOf="@+id/button_imagePage_downloadImage"
@@ -55,9 +55,10 @@
 
         <TextView
             android:id="@+id/textView_imagePage_copyright"
-            android:layout_width="245dp"
-            android:layout_height="45dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,9 +81,10 @@
 
         <TextView
             android:id="@+id/textView_imagePage_characters"
-            android:layout_width="245dp"
-            android:layout_height="45dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,9 +93,11 @@
 
         <TextView
             android:id="@+id/textView_imagePage_descriptions"
-            android:layout_width="309dp"
-            android:layout_height="59dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="4dp"
+            android:paddingBottom="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +108,7 @@
             android:id="@+id/textView_imagePage_descriptionsHeader"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:background="@color/blue"
             android:text="Descriptions"
             android:textAlignment="center"
@@ -130,8 +134,8 @@
 
         <TextView
             android:id="@+id/textView_imagePage_artists"
-            android:layout_width="182dp"
-            android:layout_height="29dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
