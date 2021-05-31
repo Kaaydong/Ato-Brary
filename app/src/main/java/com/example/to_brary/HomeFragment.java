@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.DataQueryBuilder;
 import com.example.to_brary.data_classes.Image;
 import com.google.gson.Gson;
 
@@ -113,10 +114,14 @@ public class HomeFragment extends Fragment {
         ApiKey key = new ApiKey();
         Backendless.initApp(getActivity(),APPLICATION_ID, key.getApiKey());
 
-        Backendless.Data.of(Image.class).find(new AsyncCallback<List<Image>>() {
+
+       DataQueryBuilder queryBuilder = DataQueryBuilder.create();
+       queryBuilder.setPageSize( 40 ).setOffset( 0 );
+
+        Backendless.Data.of(Image.class).find(queryBuilder, new AsyncCallback<List<Image>>() {
             @Override
             public void handleResponse(List<Image> response) {
-
+                Log.e("HELLO",response.size()+"");
                 imageList = response;
 
                 String listFromActvity = ((MainActivity)getActivity()).getItemsList();
