@@ -28,6 +28,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -51,6 +52,7 @@ public class ImageViewFragment extends Fragment {
     private TextView artistsTextView, copyrightTextView, charactersTextView, descriptionsTextView;
     private Image image;
     private Button downloadButton;
+    private ChipGroup chipGroup;
 
     public ImageViewFragment() {
         // Required empty public constructor
