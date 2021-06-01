@@ -28,6 +28,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
