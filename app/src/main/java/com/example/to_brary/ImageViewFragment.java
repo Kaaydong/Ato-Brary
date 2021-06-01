@@ -52,7 +52,6 @@ public class ImageViewFragment extends Fragment {
     private TextView artistsTextView, copyrightTextView, charactersTextView, descriptionsTextView;
     private Image image;
     private Button downloadButton;
-    private ChipGroup chipGroup;
 
     public ImageViewFragment() {
         // Required empty public constructor
