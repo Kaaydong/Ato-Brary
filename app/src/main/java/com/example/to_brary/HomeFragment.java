@@ -116,7 +116,7 @@ public class HomeFragment extends Fragment {
 
 
        DataQueryBuilder queryBuilder = DataQueryBuilder.create();
-       queryBuilder.setPageSize( 40 ).setOffset( 0 );
+       queryBuilder.setPageSize( 20 ).setOffset( 0 );
 
         Backendless.Data.of(Image.class).find(queryBuilder, new AsyncCallback<List<Image>>() {
             @Override
